@@ -1,0 +1,31 @@
+<div class="panel" [class.panel-default]="correctParameters" [class.panel-danger]="!correctParameters">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span [class.hide]="correctParameters">Incorrect </span>Properties</h3>
+    </div>
+    <div class="panel-body">
+        <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+            <div *ngIf="properties.size">
+                <div *ngFor="let property of (properties | iterableMap)">
+                    <div class="form-group" [class.has-error]="!input.valid">
+                        <label for="{{property.name}}">{{property.label}}</label>
+                        <input id="{{property.name}}"
+                               type="number"
+                               class="form-control"
+                               name="{{property.name}}"
+                               required
+                               step="any"
+                               min="0"
+                               [ngModel]="property.value"
+                               #input="ngModel">
+                        <span class="help-block" [class.hide]="input.valid">Please provide valid number.</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Calculate</button>
+            </div>
+            <div class="well well-sm" *ngIf="!properties.size">
+                There are no properties configured.
+            </div>
+        </form>
+    </div>
+</div>

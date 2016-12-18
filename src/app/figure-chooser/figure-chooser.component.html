@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Calculation type</h3>
+    </div>
+    <div class="panel-body">
+        <form #f="ngForm">
+            <div class="form-group" *ngIf="figures.size">
+                <label for="figure">Figure</label>
+                <select id="figure" class="form-control" name="figure" [ngModel]="getSelectedFigure()" (ngModelChange)="onFigureChange($event)">
+                    <option *ngFor="let figure of (figures | iterableMap)" value="{{figure.name}}">{{figure.label}}</option>
+                </select>
+            </div>
+            <div class="well well-sm" *ngIf="!figures.size">
+                There are no figures configured.
+            </div>
+            <div *ngIf="calculations.size">
+                <div class="radio" *ngFor="let calculation of (calculations | iterableMap)">
+                    <label>
+                        <input type="radio" name="calculation" [value]="calculation.name" [ngModel]="getSelectedCalculation()" (ngModelChange)="onCalculationChange($event)"> {{calculation.label}}
+                    </label>
+                </div>
+            </div>
+            <div class="well well-sm" *ngIf="!calculations.size">
+                There are no calculations configured.
+            </div>
+        </form>
+    </div>
+</div>

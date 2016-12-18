@@ -1,34 +1,43 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {TestBed, async} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from "./header/header.component";
+import {ContainerComponent} from "./container/container.component";
+import {FigureChooserComponent} from "./figure-chooser/figure-chooser.component";
+import {CalculatorComponent} from "./calculator/calculator.component";
+import {ResultComponent} from "./result/result.component";
+import {FormsModule} from "@angular/forms";
+import {CalculatorService} from "./calculator/calculator.service";
+import {IterableMapPipe} from "./pipes/iterable-map.pipe";
+import {FiguresService} from "./figures/figures.service";
 
 describe('AppComponent', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                AppComponent,
+                HeaderComponent,
+                ContainerComponent,
+                FigureChooserComponent,
+                CalculatorComponent,
+                ResultComponent,
+                IterableMapPipe,
+            ],
+            providers: [
+                FiguresService,
+                CalculatorService,
+            ],
+            imports: [
+                FormsModule
+            ]
+        });
+        TestBed.compileComponents();
     });
-    TestBed.compileComponents();
-  });
 
-  it('should create the app', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-
-  it(`should have as title 'app works!'`, async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
+    it('should create the app', async(() => {
+        let fixture = TestBed.createComponent(AppComponent);
+        let app = fixture.debugElement.componentInstance;
+        expect(app).toBeTruthy();
+    }));
 });
